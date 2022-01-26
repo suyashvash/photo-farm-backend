@@ -31,7 +31,7 @@ postRouter.route('/addPost').post((req, res) => {
 
 postRouter.route('/mypost/:id').get((req, res) => {
 
-    FarmPost.find({ token: req.params.id })
+    FarmPost.find({ token: req.params.id }).sort({ updatedAt: 'desc' })
         .then(post => { res.json({ status: true, message: "Posts found", data: post }) })
         .catch(err => { res.json({ status: false, message: "User not found or Invalid token!", log: "Token is invalid or corrupted data has beed sent!" }) })
 })
