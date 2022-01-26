@@ -6,7 +6,7 @@ const postRouter = Router();
 
 
 postRouter.route('/showall').get((req, res) => {
-    FarmPost.find()
+    FarmPost.find().sort({ updatedAt: 'desc' })
         .then(response => { res.json(response) })
         .catch(err => res.json(err))
 })
@@ -15,7 +15,6 @@ postRouter.route('/addPost').post((req, res) => {
     const token = req.body.token;
     const caption = req.body.caption;
     const postUrl = req.body.postUrl;
-    let username;
 
     User.findById(token)
         .then(user => {
